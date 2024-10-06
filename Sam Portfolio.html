@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>PORTFOLIO WEB</title>
+        <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <link rel="stylesheet" href="assets/style.css">
+        <script src="assets/script.js" defer></script>
+    </head>
+
+<style>
+
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: #121212;
+    color: #e0e0e0;
+}
+header {
+    background-color: #1a1a1a;
+    color: white;
+    text-align: center;
+    padding: 2rem 0;
+    position: relative;
+    overflow: hidden;
+}
+h1, h2 {
+    margin: 0;
+    font-size: 2.5rem;
+    position: relative;
+    z-index: 1;
+    text-align: center;
+}
+@keyframes jumpLetter {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+h1 span {
+    display: inline-block;
+    animation: jumpLetter 1s ease-in-out infinite;
+    animation-delay: calc(0.1s * var(--i));
+}
+nav {
+    background-color: #222222;
+    padding: 1rem 0;
+}
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+nav ul li {
+    margin: 0 1rem;
+}
+nav ul li a {
+    color: #e0e0e0;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease, transform 0.3s ease;
+    display: inline-block;
+}
+nav ul li a:hover {
+    color: #bb86fc;
+    transform: scale(1.1);
+}
+main {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 2rem;
+}
+main > section {
+    margin-bottom: 4rem;
+}
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+.projects-container {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+}
+.project-row {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+.project-row.reverse {
+    flex-direction: row-reverse;
+}
+.project {
+    flex: 1;
+    background-color: #1e1e1e;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.project-description {
+    flex: 1;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.project img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+.project-info {
+    padding: 1rem;
+    background-color: rgba(30, 30, 30, 0.9);
+    transition: background-color 0.3s ease;
+}
+.project:hover {
+    transform: translateY(-10px) scale(1.03);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+}
+.project:hover img {
+    transform: scale(1.1);
+}
+.project:hover .project-info {
+    background-color: rgba(30, 30, 30, 1);
+}
+footer {
+    background-color: #1a1a1a;
+    color: #e0e0e0;
+    text-align: center;
+    padding: 1rem 0;
+    margin-top: 2rem;
+}
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+.project {
+    animation: fadeIn 0.5s ease-in-out;
+}
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+.floating-icon {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 2rem;
+    animation: float 3s ease-in-out infinite;
+}
+.profile-section {
+    text-align: center;
+    padding: 3rem 0;
+    background-color: #1e1e1e;
+    margin-bottom: 2rem;
+}
+.profile-pic {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 1rem;
+    border: 4px solid #bb86fc;
+}
+.profile-name {
+    font-size: 2rem;
+    color: #bb86fc;
+    margin-bottom: 0.5rem;
+}
+.profile-title {
+    font-size: 1.2rem;
+    color: #e0e0e0;
+}
+.skills-section {
+    margin-top: 2rem;
+    background-color: #1e1e1e;
+    padding: 2rem;
+    border-radius: 8px;
+}
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+}
+.skill-item {
+    text-align: center;
+}
+.skill-chart {
+    width: 150px;
+    height: 150px;
+    margin: 0 auto;
+    position: relative;
+}
+.skill-chart svg {
+    width: 100%;
+    height: 100%;
+}
+.skill-chart .background {
+    fill: none;
+    stroke: #2c2c2c;
+}
+.skill-chart .progress {
+    fill: none;
+    stroke: #bb86fc;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+.skill-chart .percentage {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #bb86fc;
+}
+.skill-name {
+    margin-top: 1rem;
+    font-size: 1.2rem;
+    color: #e0e0e0;
+}
+.chi-sono-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 2rem;
+}
+.chi-sono-text {
+    flex: 1;
+}
+.chi-sono-photo {
+    flex: 1;
+}
+.chi-sono-photo img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+.social-links {
+    margin-top: 1rem;
+}
+.social-links a {
+    display: inline-block;
+    margin-right: 1rem;
+    color: #bb86fc;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+.social-links a:hover {
+    color: #3700b3;
+}
+.social-links a i, #contatti p i {
+    font-size: 1.2rem;
+    color: #bb86fc;
+}
+.projects-container {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+}
+.project-row {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+.project-row.reverse {
+    flex-direction: row-reverse;
+}
+.project-info h3 {
+    text-align: center;
+    margin-bottom: 0;
+}
+.project-description h3 {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+#stars-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+}
+.star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: #fff;
+    border-radius: 50%;
+    animation: fall linear infinite;
+}
+@keyframes fall {
+    to {
+        transform: translateY(100vh) translateX(100px);
+    }
+}
+body.light-mode {
+    background-color: #f0f0f0;
+    color: #333;
+}
+body.light-mode header {
+    background-color: #e0e0e0;
+    color: #333;
+}
+body.light-mode nav {
+    background-color: #d0d0d0;
+}
+body.light-mode nav ul li a {
+    color: #333;
+}
+body.light-mode nav ul li a:hover {
+    color: #6200ee;
+}
+body.light-mode .project {
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+body.light-mode .project-info {
+    background-color: rgba(255, 255, 255, 0.9);
+}
+body.light-mode .profile-section {
+    background-color: #e0e0e0;
+}
+body.light-mode .profile-name {
+    color: #6200ee;
+}
+body.light-mode .profile-title {
+    color: #333;
+}
+body.light-mode .skills-section {
+    background-color: #e0e0e0;
+}
+body.light-mode .skill-chart .background {
+    stroke: #ccc;
+}
+body.light-mode .skill-chart .progress {
+    stroke: #6200ee;
+}
+body.light-mode .skill-chart .percentage {
+    color: #6200ee;
+}
+body.light-mode footer {
+    background-color: #e0e0e0;
+    color: #333;
+}
+
+</style>
+
+<body>
+    <div id="stars-container"></div>
+    
+    <header>
+        <h1>PORTFOLIO WEB</h1>
+        <button id="theme-toggle" aria-label="Toggle dark/light mode">
+            <i class="fas fa-sun"></i>
+            <i class="fas fa-moon"></i>
+        </button>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#progetti">Progetti</a></li>
+            <li><a href="#chi-sono">Chi Sono</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#contatti">Contatti</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section id="progetti">
+            <h2>I Miei Progetti/Obiettivi</h2>
+            <div class="projects-container">
+                <div class="project-row">
+                    <div class="project">
+                        <img src="assets/img/rick-astley.jpg" alt="Progetto 1" width="250" height="200">
+                        <div class="project-info">
+                            <h3>Progetto/Obiettivo 1</h3>
+                        </div>
+                    </div>
+                    <div class="project-description">
+                        <h3>Progetto/Obiettivo 1</h3>
+                        <p>Oggi ho chiesto al mio telefono "Siri, perché sono ancora single?" ed ha attivato la fotocamera frontale.</p>
+                    </div>
+                </div>
+                <div class="project-row reverse">
+                    <div class="project-description">
+                        <h3>Progetto/Obiettivo 2</h3>
+                        <p>Ho visitato il mio nuovo amico nel suo appartamento. Mi ha detto di sentirmi a casa. Quindi l'ho cacciato. Odio le visite.</p>
+                    </div>
+                    <div class="project">
+                        <img src="assets/img/Screenshot 2024-05-09 175056.png" alt="Progetto 2" width="250" height="200">
+                        <div class="project-info">
+                            <h3>Progetto/Obiettivo 2</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-row">
+                    <div class="project">
+                        <img src="assets/img/Screenshot 2024-10-01 173616.png" alt="Progetto 3" width="250" height="200">
+                        <div class="project-info">
+                            <h3>Progetto/Obiettivo 3</h3>
+                        </div>
+                    </div>
+                    <div class="project-description">
+                        <h3>Progetto/Obiettivo 3</h3>
+                        <p>Dai un fiammifero a un uomo e sarà al caldo per alcune ore. Dagli fuoco e sarà al caldo per il resto della sua vita.</p>
+                    </div>
+                </div>
+                <div class="project-row reverse">
+                    <div class="project-description">
+                        <h3>Progetto/Obiettivo 4</h3>
+                        <p>Man mano che invecchio, ricordo tutte le persone che ho perso lungo il cammino. Forse la mia carriera come guida turistica non era la scelta giusta.</p>
+                    </div>
+                    <div class="project">
+                        <img src="assets/img/Screenshot 2024-10-06 211103.png" alt="Progetto 4" width="250" height="200">
+                        <div class="project-info">
+                            <h3>Progetto/Obiettivo 4</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="profile-section">
+            <img src="assets/img/profilo.png" alt="Foto Del Bro" class="profile-pic" width="200" height="200">
+            <h2 class="profile-name">Samuele Pierantoni</h2>
+            <p class="profile-title">Il BRO</p>
+        </section>
+
+        <section id="chi-sono">
+            <h2>Chi Sono</h2>
+            <div class="chi-sono-content">
+                <div class="chi-sono-text">
+                    <p>Mi chiamo Samuele Pierantoni e sono nato l'8 gennaio 1997.<br>
+                        <br>
+                        Ho studiato per due anni e mezzo meccatronica, ma ho scoperto che ero più interessato al lato elettronico, informatica e telecomunicazione.<br>
+                        Le mie materie preferite sono diventate elettronica e informatica.<br>
+                        <br>
+                        I miei hobby includono la caccia, la pesca, i giochi di ruolo e costruire cose handmade, come mobili, scrivanie.<br>
+                        Mi sarebbe piaciuto approfondire la lavorazione dei metalli e imparare a programmare in più linguaggi.<br>
+                        <br>
+                        Ho iniziato a lavorare a 12 anni con mio padre in cantiere, un'esperienza che mi ha insegnato l'importanza del lavoro, dell'affidabilità e dell'indipendenza.<br>
+                        Ho sviluppato soft skills come la leadership, il lavoro di squadra e il problem solving, passando da assemblatore meccanico-elettrico a collaudatore di sistemi complessi.<br>
+                        Fornivo feedback costanti sulle macchine collaudatrici e aiutavo l'assistenza a risolvere problemi legati alla parte hardware e software dei prodotti.<br>
+                        Alla fine mi sono licenziato perché la visione dell'azienda non era più in linea con la mia, e ho deciso di seguire un corso di formazione specifico per la manutenzione, completando uno stage di 300 ore Full Time dal lunedi al venerdi 8 ore al giorno in un'azienda leader nel settore.<br>
+                        <br>
+                        Uno dei miei migliori successi a livello lavorativo è stato il riconoscimento delle mie abilità e capacità, che mi ha portato a scalare i ranghi.<br>
+                        <br>
+                        A livello personale, sono soddisfatto del percorso di vita che ho fatto, cambiando radicalmente il mio modo di essere e di pensare.<br>
+                        Riconoscere il mio impegno anche da parte degli altri mi ha fatto capire che ho fatto un buon lavoro.<br>
+                        <br>
+                        A breve termine, desidero trovare un lavoro che mi stimoli e che mi permetta di aumentare le mie competenze.<br>
+                        <br>
+                        A lungo termine, aspiro a sentirmi realizzato e soddisfatto del mio impiego, raggiungendo una stabilità economica per me e per la mia famiglia.<br>
+                        <br>
+                        A livello personale, voglio rimanere curioso nei confronti del mondo che mi circonda e non permettere che il sistema mi assorba.<br>
+                        <br>
+                        Voglio essere ogni giorno la migliore esperienza per me e per le persone a me care, e desidero diventare un punto di riferimento per chi mi sta vicino, offrendo un appoggio solido nei momenti di bisogno.</p>
+                </div>
+                <div class="chi-sono-photo">
+                    <img src="assets/img/CV.png" alt="Il Bro Che Lavora" width="300" height="200">
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="skills-section">
+            <h2>Le Mie Skills</h2>
+            <p>Dopo aver completato le scuole, aver lavorato in diversi settori dal campo edile a quello informatico, ed aver seguito un corso di 300 ore Full Time,
+                grazie ad alcuni feedback lasciati da Colleghi, Principali d'azienda e Recruiter posso affermare alcune delle mie doti tra quali::</p>
+            <div class="skills-grid">
+                <div class="skill-item">
+                    <div class="skill-chart">
+                        <svg viewBox="0 0 36 36">
+                            <path class="background"
+                                d="M18 2.0845
+                                a 15.9155 15.9155 0 0 1 0 31.831
+                                a 15.9155 15.9155 0 0 1 0 -31.831"
+                                fill="none"
+                                stroke="#2c2c2c"
+                                stroke-width="2"
+                            />
+                            <path class="progress"
+                                d="M18 2.0845
+                                a 15.9155 15.9155 0 0 1 0 31.831
+                                a 15.9155 15.9155 0 0 1 0 -31.831"
+                                fill="none"
+                                stroke="#bb86fc"
+                                stroke-width="2"
+                                stroke-dasharray="90, 100"
+                            />
+                        </svg>
+                        <div class="percentage">55%</div>
+                    </div>
+                    <p class="skill-name">Team Work</p>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-chart">
+                        <svg viewBox="0 0 36 36">
+                            <path class="background"
+                                d="M18 2.0845
+                                a 15.9155 15.9155 0 0 1 0 31.831
+                                a 15.9155 15.9155 0 0 1 0 -31.831"
+                                fill="none"
+                                stroke="#2c2c2c"
+                                stroke-width="2"
+                            />
+                            <path class="progress"
+                                d="M18 2.0845
+                                a 15.9155 15.9155 0 0 1 0 31.831
+                                a 15.9155 15.9155 0 0 1 0 -31.831"
+                                fill="none"
+                                stroke="#bb86fc"
+                                stroke-width="2"
+                                stroke-dasharray="85, 100"
+                            />
+                        </svg>
+                        <div class="percentage">70%</div>
+                    </div>
+                    <p class="skill-name">Problem Solving</p>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-chart">
+                        <svg viewBox="0 0 36 36">
+                            <path class="background"
+                                d="M18 2.0845
+                                a 15.9155 15.9155 0 0 1 0 31.831
+                                a 15.9155 15.9155 0 0 1 0 -31.831"
+                                fill="none"
+                                stroke="#2c2c2c"
+                                stroke-width="2"
+                            />
+                            <path class="progress"
+                                d="M18 2.0845
+                                a 15.9155 15.9155 0 0 1 0 31.831
+                                a 15.9155 15.9155 0 0 1 0 -31.831"
+                                fill="none"
+                                stroke="#bb86fc"
+                                stroke-width="2"
+                                stroke-dasharray="80, 100"
+                            />
+                        </svg>
+                        <div class="percentage">60%</div>
+                    </div>
+                    <p class="skill-name">Creativity</p>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-chart">
+                        <svg viewBox="0 0 36 36">
+                            <path class="background"
+                                d="M18 2.0845
+                                a 15.9155 15.9155 0 0 1 0 31.831
+                                a 15.9155 15.9155 0 0 1 0 -31.831"
+                                fill="none"
+                                stroke="#2c2c2c"
+                                stroke-width="2"
+                            />
+                            <path class="progress"
+                                d="M18 2.0845
+                                a 15.9155 15.9155 0 0 1 0 31.831
+                                a 15.9155 15.9155 0 0 1 0 -31.831"
+                                fill="none"
+                                stroke="#bb86fc"
+                                stroke-width="2"
+                                stroke-dasharray="75, 100"
+                            />
+                        </svg>
+                        <div class="percentage">80%</div>
+                    </div>
+                    <p class="skill-name">Adaptability</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contatti">
+            <h2>Contattami</h2>
+            <p>Sei interessato a collaborare? Non esitare a contattarmi!</p>
+            <p><i class="fas fa-envelope"></i> Email: <a href="mailto:sampierantoni97@gmail.com">sampierantoni97@gmail.com</a></p>
+            <p><i class="fas fa-phone"></i> Telefono: +39 331 909 9037</p>
+            <div class="social-links">
+                <a href="https://wa.me/3319099037" target="_blank"><i class="bi bi-whatsapp"></i></a>
+                <a href="https://www.instagram.com/sam_pierantoni?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i> Instagram</a>
+                <a href="https://www.linkedin.com/in/samuele-pierantoni-546a99231/" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i> LinkedIn</a>
+            </div>
+
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Federico Carcone "Effsi" - All Right Reserved.</p>
+    </footer>
+
+</body>
+
+</html>
